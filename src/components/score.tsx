@@ -21,7 +21,7 @@ export default function Score() {
   return (
     <Text
       color={0xffa276}
-      font="assets/SpaceMono-Bold.ttf"
+      font="/SpaceMono-Bold.ttf"
       fontSize={0.52}
       anchorX="center"
       anchorY="middle"
@@ -29,7 +29,7 @@ export default function Score() {
       quaternion={[-0.4582265217274104, 0, 0, 0.8888354486549235]}
     >
       {formatScoreText(score)}
-      <PositionalAudio ref={soundRef} url="assets/score.ogg" loop={false} />
+      <PositionalAudio ref={soundRef} url="/score.ogg" loop={false} />
     </Text>
   );
 }

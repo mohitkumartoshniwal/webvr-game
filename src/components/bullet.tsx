@@ -44,7 +44,7 @@ export function Bullet({ bulletData }: BulletProps) {
           setTimeout(() => {
             target.visible = true;
             target.position.x = Math.random() * 10 - 5;
-            target.position.z = Math.random() * 10 - 5;
+            target.position.z = -Math.random() * 10 - 5;
           }, 1000);
         }
       });

@@ -28,14 +28,14 @@ export default function Gun() {
         laserSound.stop();
       }
       laserSound.play();
-      gamepad?.hapticActuators[0].pulse(0.5, 10);
+      gamepad?.hapticActuators[0]?.pulse(0.5, 10);
     }
   });
 
   return (
     <>
       <primitive object={scene} />
-      <PositionalAudio ref={soundRef} url="assets/laser.ogg" loop={false} />
+      <PositionalAudio ref={soundRef} url="/laser.ogg" loop={false} />
     </>
   );
 }
