@@ -6,6 +6,7 @@ import { PositionalAudio as PAudio } from "three";
 function formatScoreText(score: number) {
   return score.toString().padStart(4, "0");
 }
+
 export default function Score() {
   const { score } = useGlobalContext();
   const soundRef = useRef<PAudio>(null);
@@ -17,14 +18,13 @@ export default function Score() {
       scoreSound.play();
     }
   }, [score]);
-
   return (
     <Text
       color={0xffa276}
       font="/SpaceMono-Bold.ttf"
       fontSize={0.52}
-      anchorX="center"
-      anchorY="middle"
+      anchorX={"center"}
+      anchorY={"middle"}
       position={[0, 0.67, -1.44]}
       quaternion={[-0.4582265217274104, 0, 0, 0.8888354486549235]}
     >

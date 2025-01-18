@@ -1,9 +1,9 @@
 import { useGLTF } from "@react-three/drei";
-import { BulletData } from "../types";
 import { Mesh, Vector3 } from "three";
-import { useFrame } from "@react-three/fiber";
+import { BulletData } from "../types";
 import { useRef } from "react";
 import { bulletSpeed, useGlobalContext } from "../context/global-context";
+import { useFrame } from "@react-three/fiber";
 
 type BulletProps = {
   bulletData: BulletData;
@@ -11,8 +11,8 @@ type BulletProps = {
 
 const forwardVector = new Vector3(0, 0, -1);
 
-export function Bullet({ bulletData }: BulletProps) {
-  const { targets, removeBullet, addScore } = useGlobalContext();
+export default function Bullet({ bulletData }: BulletProps) {
+  const { removeBullet, targets, addScore } = useGlobalContext();
   const { scene } = useGLTF("/blaster.glb");
   const bulletPrototype = scene.getObjectByName("bullet")! as Mesh;
   const ref = useRef<Mesh>(null);

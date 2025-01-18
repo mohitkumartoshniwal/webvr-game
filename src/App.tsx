@@ -1,31 +1,13 @@
-import { Environment, Gltf, PerspectiveCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { createXRStore, XR } from "@react-three/xr";
 import { GlobalProvider } from "./context/global-context";
-import { Target } from "./components/target";
+import { Environment, Gltf, PerspectiveCamera } from "@react-three/drei";
+import { createXRStore, XR } from "@react-three/xr";
 import Gun from "./components/gun";
 import Bullets from "./components/bullets";
+import Target from "./components/target";
 import Score from "./components/score";
 
 const xrStore = createXRStore({
-  // emulate: {
-  //   controller: {
-  //     left: {
-  //       position: [-0.15649, 1.43474, -0.38368],
-  //       quaternion: [
-  //         0.14766305685043335, -0.02471366710960865, -0.0037767395842820406,
-  //         0.9887216687202454,
-  //       ],
-  //     },
-  //     right: {
-  //       position: [0.15649, 1.43474, -0.38368],
-  //       quaternion: [
-  //         0.14766305685043335, 0.02471366710960865, -0.0037767395842820406,
-  //         0.9887216687202454,
-  //       ],
-  //     },
-  //   },
-  // },
   controller: {
     right: Gun,
   },
@@ -37,20 +19,20 @@ export default function App() {
       <>
         <Canvas
           style={{
-            position: "fixed",
             width: "100vw",
             height: "100vh",
+            position: "fixed",
           }}
         >
-          <color args={[0x808080]} attach={"background"}></color>
+          <color args={[0x808080]} attach={"background"} />
           <PerspectiveCamera makeDefault position={[0, 1.6, 2]} fov={75} />
-          <Environment preset={"warehouse"} />
-          <XR store={xrStore} />
+          <Environment preset="warehouse" />
           <Gltf src="/spacestation.glb" />
+          <XR store={xrStore} />
+          <Bullets />
           <Target targetIdx={0} />
           <Target targetIdx={1} />
           <Target targetIdx={2} />
-          <Bullets />
           <Score />
         </Canvas>
         <div

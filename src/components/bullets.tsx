@@ -1,5 +1,5 @@
 import { useGlobalContext } from "../context/global-context";
-import { Bullet } from "./bullet";
+import Bullet from "./bullet";
 
 export default function Bullets() {
   const { bullets } = useGlobalContext();

@@ -4,34 +4,37 @@ import {
   useXRInputSourceStateContext,
 } from "@react-three/xr";
 import { useGlobalContext } from "../context/global-context";
-import { PositionalAudio as PAudio, Quaternion, Vector3 } from "three";
+import { Quaternion, Vector3, PositionalAudio as PAudio } from "three";
 import { useRef } from "react";
 
 export default function Gun() {
   const { addBullet } = useGlobalContext();
+  const { scene } = useGLTF("/blaster.glb");
   const state = useXRInputSourceStateContext("controller");
   const gamepad = state.inputSource.gamepad;
-
-  const { scene } = useGLTF("/blaster.glb");
-  const bulletPrototype = scene.getObjectByName("bullet")!;
   const soundRef = useRef<PAudio>(null);
 
-  useXRControllerButtonEvent(state, "xr-standard-trigger", (state) => {
-    if (state === "pressed") {
-      addBullet(
-        bulletPrototype.getWorldPosition(new Vector3()),
-        bulletPrototype.getWorldQuaternion(new Quaternion())
-      );
+  const bulletPrototype = scene.getObjectByName("bullet")!;
 
-      const laserSound = soundRef.current!;
-      if (laserSound.isPlaying) {
-        laserSound.stop();
+  useXRControllerButtonEvent(
+    state,
+    "xr-standard-trigger",
+    (controllerState) => {
+      if (controllerState === "pressed") {
+        addBullet(
+          bulletPrototype.getWorldPosition(new Vector3()),
+          bulletPrototype.getWorldQuaternion(new Quaternion())
+        );
+
+        const laserSound = soundRef.current!;
+        if (laserSound.isPlaying) {
+          laserSound.stop();
+        }
+        laserSound.play();
+        gamepad?.hapticActuators[0]?.pulse(0.5, 10);
       }
-      laserSound.play();
-      gamepad?.hapticActuators[0]?.pulse(0.5, 10);
     }
-  });
-
+  );
   return (
     <>
       <primitive object={scene} />
